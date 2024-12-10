@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 )
 
@@ -32,8 +33,10 @@ func main() {
 	}
 
 	wordToBeFound := "XMAS"
+	xMAS := []string{"MS", "SM"}
 
 	sum := 0
+	sum2 := 0
 	for index, line := range inputMatrix {
 		for indexLetter, letter := range line {
 			if letter == "X" {
@@ -117,9 +120,23 @@ func main() {
 					}
 				}
 			}
+
+			if letter == "A" && index+1 < len(inputMatrix) && index-1 >= 0 && indexLetter-1 >= 0 && indexLetter+1 < len(line) {
+
+				fmt.Printf("A at- LINE: %d - INDEX %d\n", index, indexLetter)
+
+				firstDiagonal := inputMatrix[index-1][indexLetter-1] + inputMatrix[index+1][indexLetter+1]
+				secondDiagonal := inputMatrix[index+1][indexLetter-1] + inputMatrix[index-1][indexLetter+1]
+
+				if slices.Contains(xMAS, firstDiagonal) && slices.Contains(xMAS, secondDiagonal) {
+					fmt.Printf("Found x-MAS:\n firstDiagonal %s\n secondDiagonal: %s\n", firstDiagonal, secondDiagonal)
+					sum2++
+				}
+			}
 		}
 	}
 
-	fmt.Printf("SUM: %d", sum)
+	fmt.Printf("SUM: %d\n", sum)
+	fmt.Printf("SUM 2: %d", sum2)
 	//sum = 2613
 }
