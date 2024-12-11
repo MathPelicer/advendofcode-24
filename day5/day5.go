@@ -33,6 +33,7 @@ func main() {
 
 	//var isUpdateOrderValid []bool
 	sumOfMiddleNumbers := 0
+	var incorrectUpdates [][]string
 	for _, pageUpdate := range pageUpdates {
 		update := strings.Split(pageUpdate, ",")
 		var passedPages []string
@@ -51,8 +52,12 @@ func main() {
 		if isValid == true {
 			middleNumber, _ := strconv.Atoi(update[len(update)/2])
 			sumOfMiddleNumbers += middleNumber
+		} else {
+			incorrectUpdates = append(incorrectUpdates, update)
 		}
 	}
 
-	fmt.Print(sumOfMiddleNumbers)
+	fmt.Printf("sum of middle numbers from correct updates: %d\n", sumOfMiddleNumbers)
+
+	fmt.Print(incorrectUpdates)
 }
