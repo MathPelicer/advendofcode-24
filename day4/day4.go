@@ -1,36 +1,14 @@
 package main
 
 import (
-	"bufio"
+	"advent-of-code-24/utils"
 	"fmt"
-	"os"
 	"slices"
 	"strings"
 )
 
 func main() {
-	file, _ := os.Open("input.txt")
-
-	defer file.Close()
-
-	reader := bufio.NewReader(file)
-
-	input := ""
-	var inputMatrix [][]string
-	for {
-		line, _, err := reader.ReadLine()
-		if len(line) > 0 {
-			var row []string
-			for _, letter := range string(line) {
-				row = append(row, string(letter))
-			}
-			input += string(line)
-			inputMatrix = append(inputMatrix, row)
-		}
-		if err != nil {
-			break
-		}
-	}
+	inputMatrix := utils.ReadFileInto2dArray("input.txt")
 
 	wordToBeFound := "XMAS"
 	xMAS := []string{"MS", "SM"}

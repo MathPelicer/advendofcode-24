@@ -1,31 +1,14 @@
 package main
 
 import (
-	"bufio"
+	"advent-of-code-24/utils"
 	"fmt"
-	"os"
 	"regexp"
 	"strconv"
 )
 
 func main() {
-	file, _ := os.Open("input.txt")
-
-	defer file.Close()
-
-	reader := bufio.NewReader(file)
-
-	input := ""
-	for {
-		line, _, err := reader.ReadLine()
-		if len(line) > 0 {
-			input += string(line)
-		}
-		if err != nil {
-			break
-		}
-	}
-
+	input, _ := utils.ReadFileIntoString("input.txt")
 	mulPatterns := FindAllFromRegex("mul\\(\\d{1,3},\\d{1,3}\\)|do\\(\\)|don't\\(\\)", input)
 
 	sum := 0
